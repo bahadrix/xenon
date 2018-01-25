@@ -1,0 +1,47 @@
+syntax = "proto3";
+package model;
+// compile command: protoc --go_out=. *.proto
+
+enum RequestType {
+    ADD_HASH = 0;
+    SEARCH = 2;
+}
+
+message HashSet {
+    repeated uint64 hashes = 1;
+}
+
+message Request {
+    RequestType type = 1;
+    bytes payload = 2;
+}
+
+message AddHash {
+    HashSet hashSet = 1;
+}
+
+message Search {
+    uint64 hash = 1;
+    uint32 distance = 2;
+}
+
+enum ResponseType {
+    SUCCESS = 0;
+    ERROR = 1;
+}
+
+message Response {
+    ResponseType type = 1;
+    bytes payload = 2;
+}
+
+message SearchResults {
+    repeated uint64 hashes = 1;
+}
+message ErrorInfo {
+    string info = 1;
+}
+
+
+
+
